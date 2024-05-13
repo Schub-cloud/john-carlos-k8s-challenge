@@ -1,0 +1,17 @@
+appName: go-check-pods
+namespace: go-check-pods-ns
+
+configmap:
+  name: go-check-pods-config
+  data:
+    NAMESPACE: go-check-pods-ns
+
+image:
+  name: jczuniga1992/go-check-pods
+  tag: latest
+
+rbac:
+  clusterrole:
+    name: pod-reader
+  clusterrolebinding:
+    name: read-pods
