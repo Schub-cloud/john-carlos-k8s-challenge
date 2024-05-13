@@ -1,5 +1,61 @@
 # K8S Challenge
 
+
+A very simple and minimalist REST API written in Go using Gorilla Mux HTTP router package to access pods inside a given namespace with the GET /pods endpoint.
+
+Also include `/healthz` and `/readyz` for kubernetes liveness and readiness probes, respectively.
+
+# Required envs
+
+* `NAMESPACE` : str
+
+# How to run locally
+
+* Navigate to `src` directory
+
+* `docker build -t go-check-pods .`
+
+* `docker run -p 80:80 -e NAMESPACE=default go-check-pods`
+
+# Minikube Deployment Steps:
+
+Required tools:
+
+- Minikube
+- Kubectl, Helm CLI
+
+* Minikube namespace creation inside default minikube cluster:
+
+Option A: Provision namespace via Terraform. Navigate to `provision` directory and run:
+
+`terraform init`
+
+`terraform plan -var-file="env/default.tfvars"`
+
+`terraform apply -var-file="env/default.tfvars"`
+
+Default namespace name is: go-check-pods-ns. This can be overriden in env/default.tfvars
+
+Option B: Create namespace via helm install command (--create-namespace) - Known caveat is that namespace will not be removed and tracked when uninstalling helm deployments in new namespaces(helm uninstall)
+
+* Build helm dependencies. Navigate to `go-check-pods` and run: `helm dependency build`. This should create chart.lock file and include the reloader templates inside the helm charts. Validate by running `helm template .`
+
+* Run helm install: `helm install go-check-pods-release go-check-pods --namespace go-check-pods-ns --create-namespace`
+
+
+* Deployments, configmaps, and services should be created following the command above. To access service from localhost, use minikube service built-in command.
+
+`minikube service <app-name> -n <namespace>`
+`minikube service go-check-pods -n go-check-pods-ns`
+
+
+# CI/CD
+
+The app utilizes GitHub Actions to build and push the image to Docker Hub upon code push to `main` branch. This will be followed by a `helm upgrade` command to force a helm chart upgrade with the new image version (using mutable `latest` image tagging for simplicity)
+
+CI/CD is currently not tested and working as user is unable to post GitHub Actions secrets due to permission limitations.
+
+
 # Description
 
 This challenge is meant to evaluate software engineering and kubernetes skills, mind to apply all the best practices you know.
