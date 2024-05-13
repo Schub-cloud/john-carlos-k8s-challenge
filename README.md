@@ -40,7 +40,7 @@ Option B: Create namespace via helm install command (--create-namespace) - Known
 
 * Build helm dependencies. Navigate to `go-check-pods` and run: `helm dependency build`. This should create chart.lock file and include the reloader templates inside the helm charts. Validate by running `helm template .`
 
-* Run helm install: `helm install go-check-pods-release go-check-pods --namespace go-check-pods-ns --create-namespace`
+* Run helm install: `helm install <release-name> go-check-pods --namespace go-check-pods-ns --create-namespace`
 
 
 * Deployments, configmaps, and services should be created following the command above. To access service from localhost, use minikube service built-in command.
