@@ -30,9 +30,9 @@ Option A: Provision namespace via Terraform. Navigate to `provision` directory a
 
 `terraform init`
 
-`terraform plan"`
+`terraform plan`
 
-`terraform apply"`
+`terraform apply`
 
 Default namespace name is: go-check-pods-ns.
 
