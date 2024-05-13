@@ -3,7 +3,7 @@
 
 A very simple and minimalist REST API written in Go using Gorilla Mux HTTP router package to access pods inside a given namespace with the GET /pods endpoint.
 
-Also include `/healthz` and `/readyz` for kubernetes liveness and readiness probes, respectively.
+Also includes `/healthz` and `/readyz` for kubernetes liveness and readiness probes, respectively.
 
 # Required envs
 
