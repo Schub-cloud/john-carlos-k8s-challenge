@@ -30,11 +30,11 @@ Option A: Provision namespace via Terraform. Navigate to `provision` directory a
 
 `terraform init`
 
-`terraform plan -var-file="env/default.tfvars"`
+`terraform plan"`
 
-`terraform apply -var-file="env/default.tfvars"`
+`terraform apply"`
 
-Default namespace name is: go-check-pods-ns. This can be overriden in env/default.tfvars
+Default namespace name is: go-check-pods-ns.
 
 Option B: Create namespace via helm install command (--create-namespace) - Known caveat is that namespace will not be removed and tracked when uninstalling helm deployments in new namespaces(helm uninstall)
 
